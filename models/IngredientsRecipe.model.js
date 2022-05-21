@@ -3,7 +3,8 @@ var mongoosePaginate = require('mongoose-paginate');
 
 var IngredientsRecipeSchema = new mongoose.Schema({
     recipe: {type: mongoose.Types.ObjectId, required: true},
-    description: {type: String, required: true}
+    description: {type: String, required: true},
+    quantity: {type: String, required: true}
 });
 
 IngredientsRecipeSchema.plugin(mongoosePaginate);
