@@ -8,7 +8,6 @@ var RecipeSchema = new mongoose.Schema({
     difficulty: {type: mongoose.Types.ObjectId, required: true},
     user: {type: mongoose.Types.ObjectId, required: true},
     image: String,
-    rating: {type: Number, default: 0},
     vegan: {type: Boolean, default: false},
     celiac: {type: Boolean, default: false}
 });
