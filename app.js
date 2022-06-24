@@ -9,19 +9,18 @@ var fs = require('fs');
 //incorporo cors
 var cors = require('cors');
 
-//importo rutas
+//importo router
 var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/user'); 
+var apiRouter = require('./routes/api'); //Custom
+var utilRouter = require('./routes/utils');
 
 //instancio el servidor
 var app = express();
 
-// seteo vistas 
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
-
-//Indico que voy a usar json 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
@@ -35,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Indico las rutas de los endpoint
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
+app.use('/utils/',utilRouter);
 
 //onsole.log("processENV",process.env);
 if (process.env.NODE_ENV === 'Development') {
@@ -89,6 +89,5 @@ var port = process.env.PORT || 8080;
 app.listen(port,()=>{
     console.log('Servidor de ABM Users iniciado en el puerto ',port);
 });
-
 
 module.exports = app;
