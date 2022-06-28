@@ -41,7 +41,6 @@ if (process.env.NODE_ENV === 'Development') {
   require('./config').config();
 }
 
-
 //Database connection --
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird;
