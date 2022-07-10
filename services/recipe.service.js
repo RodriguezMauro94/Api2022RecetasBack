@@ -1,5 +1,6 @@
 // Gettign the Newly created Mongoose Model we just created 
 var Recipe = require('../models/Recipe.model');
+var Rating = require('../models/Rating.model');
 
 // Saving the context of this module inside the _the variable
 _this = this
@@ -43,5 +44,21 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         // return a Error message describing the reason 
         console.log("error services", e)
         throw Error('Error while searching a recipe');
+    }
+}
+
+exports.createRating = async function (user) {
+    var newRating = new Rating({
+        recipe: user.recipeId,
+        rating: user.rating
+    })
+
+    try {
+        var savedRating = await newRating.save();
+        return savedRating._id;
+    } catch (e) {
+        // return a Error message describing the reason 
+        console.log(e)    
+        throw Error("Error while Creating Rating")
     }
 }

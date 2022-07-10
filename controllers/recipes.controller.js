@@ -31,3 +31,18 @@ exports.getRecipes = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message});
     }
 }
+
+exports.postRating = async function (req, res, next) {
+    var Rating = {
+        user: req.body.user,
+        rating: req.body.rating,
+        recipeId: req.body.recipeId
+    }
+    try {
+        var createdUser = await RecipeService.createRating(Rating)
+        return res.status(201).json({createdUser, message: "Succesfully posted rating"})
+    } catch (e) {
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Posting rating was Unsuccesfull"})
+    }
+}
