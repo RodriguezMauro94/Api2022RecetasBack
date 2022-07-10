@@ -14,13 +14,34 @@ exports.getTopRecipes = async function (query, page, limit) {
     }
     // Try Catch the awaited promise to handle the error 
     try {
-        console.log("Query",query)
+        console.log("Query", query)
         var Recipes = await Recipe.paginate(query, options)
         // Return the Userd list that was retured by the mongoose promise
         return Recipes;
     } catch (e) {
         // return a Error message describing the reason 
-        console.log("error services",e)
-        throw Error('Error while Paginating Users');
+        console.log("error services", e)
+        throw Error('Error while getting Top Recipes');
+    }
+}
+
+exports.getRecipes = async function (query, page, limit, searchQuery) {
+    var per_page = parseInt(req.query.per_page) || 10
+    var page_no = parseInt(req.query.page_no) || 1
+    var pagination = {
+        limit: per_page,
+        skip: per_page * (page_no - 1)
+    }
+    // Try Catch the awaited promise to handle the error 
+    try {
+        console.log("Query", query)
+        var recipes = await Recipe.find({
+            category: searchQuery // CHECK This
+        }).limit(pagination.limit).skip(pagination.skip).exec()
+        return recipes;
+    } catch (e) {
+        // return a Error message describing the reason 
+        console.log("error services", e)
+        throw Error('Error while searching a recipe');
     }
 }
