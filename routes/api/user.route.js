@@ -10,16 +10,16 @@ var Authorization = require('../../auth/authorization');
 router.get('/test', function (req, res, next) {
   res.send('Llegaste a la ruta de  api/user.routes');
 });
-router.post('/registration', UserController.createUser)
-router.post('/login/', UserController.loginUser)
-router.get('/', Authorization, UserController.getUsers)
-router.post('/userByMail', Authorization, UserController.getUsersByMail)
-router.put('/', Authorization, UserController.updateUser)
-router.delete('/:id', Authorization, UserController.removeUser)
-router.post('/guardarImgUser', UserController.guardarImagenUser)
+router.post('/registration', UserController.createUser);
+router.post('/login/', UserController.loginUser);
+router.get('/', Authorization, UserController.getUsers); // CHECK This
+router.post('/userByMail', Authorization, UserController.getUsersByMail);
+router.put('/', Authorization, UserController.updateUser);
+router.delete('/:id', Authorization, UserController.removeUser); // CHECK This
+router.post('/guardarImgUser', UserController.guardarImagenUser);
 router.post('/uploadImg', UploadController.uploadFilesImgUser);
-router.post('/imgUserByMail', Authorization, UserController.getImagenUserByMail)
-router.post('/sendMail', MailController.sendEmail)
+router.post('/imgUserByMail', Authorization, UserController.getImagenUserByMail);
+router.post('/sendMail', MailController.sendEmail);
 
 // Export the Router
 module.exports = router;
