@@ -15,13 +15,13 @@ exports.getTopRecipes = async function (query, page, limit) {
     }
     // Try Catch the awaited promise to handle the error 
     try {
-        console.log("Query", query)
-        var Recipes = await Recipe.paginate(query, options)
+        console.log("Query", query);
+        var Recipes = await Recipe.paginate(query, options);
         // Return the Userd list that was retured by the mongoose promise
         return Recipes;
     } catch (e) {
         // return a Error message describing the reason 
-        console.log("error services", e)
+        console.log("error services", e);
         throw Error('Error while getting Top Recipes');
     }
 }
@@ -35,14 +35,14 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
     }
     // Try Catch the awaited promise to handle the error 
     try {
-        console.log("Query", query)
+        console.log("Query", query);
         var recipes = await Recipe.find({
             category: searchQuery // CHECK This
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
     } catch (e) {
         // return a Error message describing the reason 
-        console.log("error services", e)
+        console.log("error services", e);
         throw Error('Error while searching a recipe');
     }
 }
@@ -51,14 +51,14 @@ exports.createRating = async function (user) {
     var newRating = new Rating({
         recipe: user.recipeId,
         rating: user.rating
-    })
+    });
 
     try {
         var savedRating = await newRating.save();
         return savedRating._id;
     } catch (e) {
         // return a Error message describing the reason 
-        console.log(e)    
-        throw Error("Error while Creating Rating")
+        console.log(e);
+        throw Error("Error while Creating Rating");
     }
 }
