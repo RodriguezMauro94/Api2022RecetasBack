@@ -5,17 +5,12 @@ Usuarios:
 - get - /
 - put - /
 - post - /registration
+- delete - /:id
 - post - /login/
 - post - /logout/
-- post - /updateUser
-- delete - /:id
-CHECK - post - /sendMail
-CHECK - post - /userByMail
-
-Usuarios-Img:
+- post - /guardarImgUser
 - post - /uploadImgUser
-CHECK - post - /imgUserByMail
-CHECK - post - /guardarImgUser
+- post - /sendMail
 
 Recetas:
 - get - /
