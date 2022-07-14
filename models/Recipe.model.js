@@ -12,7 +12,7 @@ var RecipeSchema = new mongoose.Schema({
     celiac: {type: Boolean, default: false},
     user: {type: mongoose.Types.ObjectId, required: true},
     steps: {type: Array, "default": [] },
-    category: {type: mongoose.Types.ObjectId, required: true},
+    category: {type: String, required: true},
     rating: {type: Array, "default": [] },
     isActive: {type: Boolean, "default": true}
 });
