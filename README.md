@@ -42,15 +42,11 @@ npm
 Express
 jsonwebtoken
 mongoose
+nodemon
 
-How to create a RESTful CRUD API using Nodejs?
+`npm install`
 
-And how to secure our API with JWT Web-Token?
-
-API using mongodb as the database.
-
-With this code, we can check our user and password and pass back a token in a JSON response. 
-We are using mongodb to register the user and jsonwebtoken to create the token.
+`nodemon app.js`
 
 
 ### Clone
