@@ -1,26 +1,18 @@
-// Gettign the Newly created Mongoose Model we just created 
 var Recipe = require('../models/Recipe.model');
 var Rating = require('../models/Rating.model');
 
-// Saving the context of this module inside the _the variable
 _this = this
 
-// Async function to get the User List
 exports.getTopRecipes = async function (query, page, limit) {
-
-    // Options setup for the mongoose paginate
     var options = {
         page,
         limit
     }
-    // Try Catch the awaited promise to handle the error 
     try {
         console.log("Query", query);
         var Recipes = await Recipe.paginate(query, options);
-        // Return the Userd list that was retured by the mongoose promise
         return Recipes;
     } catch (e) {
-        // return a Error message describing the reason 
         console.log("error services", e);
         throw Error('Error while getting Top Recipes');
     }
@@ -33,7 +25,6 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         limit: per_page,
         skip: per_page * (page_no - 1)
     }
-    // Try Catch the awaited promise to handle the error 
     try {
         console.log("Query", query);
         var recipes = await Recipe.find({
@@ -41,9 +32,34 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
     } catch (e) {
-        // return a Error message describing the reason 
         console.log("error services", e);
         throw Error('Error while searching a recipe');
+    }
+}
+
+exports.createRecipe = async function (recipe) {
+    var newRecipe = new Recipe({
+        //TODO
+        //recipe: user.recipeId
+    });
+
+    try {
+        var savedRecipe = await newRecipe.save();
+        return savedRecipe._id;
+    } catch (e) {
+        console.log(e);
+        throw Error("Error while Creating Recipe");
+    }
+}
+
+exports.deleteRecipe = async function (recipe) {
+    try {
+        var recipe = await Recipe.findById(recipe);
+        recipe.isActive = false;
+        return recipe._id;
+    } catch (e) {
+        console.log(e);
+        throw Error("Error while Creating Recipe");
     }
 }
 
@@ -57,7 +73,6 @@ exports.createRating = async function (user) {
         var savedRating = await newRating.save();
         return savedRating._id;
     } catch (e) {
-        // return a Error message describing the reason 
         console.log(e);
         throw Error("Error while Creating Rating");
     }

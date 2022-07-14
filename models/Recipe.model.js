@@ -13,8 +13,8 @@ var RecipeSchema = new mongoose.Schema({
     user: {type: mongoose.Types.ObjectId, required: true},
     steps: {type: Array, "default": [] },
     category: {type: mongoose.Types.ObjectId, required: true},
-    rating: {type: Array, "default": [] }
-    
+    rating: {type: Array, "default": [] },
+    isActive: {type: Boolean, "default": true}
 });
 
 RecipeSchema.plugin(mongoosePaginate);

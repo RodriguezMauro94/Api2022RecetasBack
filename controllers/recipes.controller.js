@@ -1,20 +1,51 @@
 var RecipeService = require('../services/recipe.service');
 
-// Saving the context of this module inside the _the variable
 _this = this;
 
-// Async Controller function to get the To do List
-exports.getTopRecipes = async function (req, res, next) {
+exports.getRecipe = async function (req, res, next) {
+    try {
+        let filtro= {_id: req.body.id}
+        var recipe = await RecipeService.getRecipes(filtro, 1, 1);
+        return res.status(200).json({status: 200, data: recipe, message: "Succesfully Recipe Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
 
-    // Check the existence of the query parameters, If doesn't exists assign a default value
+exports.createRecipe = async function (req, res, next) {
+    var recipe = {
+        //TODO
+        /*name: req.body.name,
+        email: req.body.email,
+        password: req.body.password*/
+    }
+    try {
+        var createdRecipe = await RecipeService.createRecipe(recipe)
+        return res.status(201).json({createdRecipe, message: "Succesfully Created Recipe"})
+    } catch (e) {
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Recipe creation was Unsuccesfull"})
+    }
+}
+
+exports.deleteRecipe = async function (req, res, next) {
+    let recipe = req.body.id;
+    try {
+        var createdRecipe = await RecipeService.deleteRecipe(recipe)
+        return res.status(201).json({createdRecipe, message: "Succesfully Deleted Recipe"})
+    } catch (e) {
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Recipe deletion was Unsuccesfull"})
+    }
+}
+
+exports.getTopRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     try {
         var topRecipes = await RecipeService.getTopRecipes({}, page, limit);
-        // Return the Top Recipes list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: topRecipes, message: "Succesfully Top Recipes Recieved"});
     } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
