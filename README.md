@@ -1,5 +1,40 @@
 # nodejs-secure restful-api with jwt web-Token
 
+# Endpoints
+Usuarios:
+- get - /
+- put - /
+- post - /registration
+- post - /login/
+- post - /logout/
+- post - /updateUser
+- delete - /:id
+CHECK - post - /sendMail
+CHECK - post - /userByMail
+
+Usuarios-Img:
+- post - /uploadImgUser
+CHECK - post - /imgUserByMail
+CHECK - post - /guardarImgUser
+
+Recetas:
+- get - /
+- delete - /
+- post - /
+- get - /getTopRecipes
+- get - /getRecipes/:searchQuery
+- post - /rating
+
+Recetas-Img:
+- post - /imgRecipeCover
+- post - /imgRecipeStep
+
+Categorias:
+- get - /
+
+Dificultades:
+- get - /
+
 ### Prerequisites
 
 Node
