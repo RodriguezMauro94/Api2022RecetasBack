@@ -27,9 +27,6 @@ Recetas-Img:
 Categorias:
 - get - /
 
-Dificultades:
-- get - /
-
 ### Prerequisites
 
 Node
