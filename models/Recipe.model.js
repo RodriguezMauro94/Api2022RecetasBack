@@ -6,7 +6,6 @@ var RecipeSchema = new mongoose.Schema({
     description: {type: String, required: true},
     urlImage: {type: String, required: true},
     ingredients: {type: Array, "default": [] },
-    ratings: {type: Number, required: true},
     difficulty: {type: String, required: true},
     vegan: {type: Boolean, default: false},
     celiac: {type: Boolean, default: false},
