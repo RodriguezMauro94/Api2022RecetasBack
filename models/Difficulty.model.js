@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate');
 
 var DifficultySchema = new mongoose.Schema({
+    difficulty: {type: String, required: true},
     description: {type: String, required: true}
 });
 
