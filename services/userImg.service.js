@@ -1,19 +1,12 @@
 // Gettign the Newly created Mongoose Model we just created 
 var UserImg = require('../models/UserImg.model');
+var cloudinary = require('../cloudinary/cloudinary');
 
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 // Saving the context of this module inside the _the variable
 _this = this
-
-//configurar cloudinary
-var cloudinary = require('cloudinary');
-cloudinary.config({
-    cloud_name: 'de7zrcqyz',
-    api_key: '114862491191135',
-    api_secret: 'lQ7HA9Yh9kJiPHhC6Eef_zowfGo'
-});
 
 // Async function to get the Contact List
 exports.getImagenes = async function (query, page, limit) {
