@@ -35,7 +35,7 @@ exports.createRecipe = async function (req, res, next) {
 }
 
 exports.deleteRecipe = async function (req, res, next) {
-    let recipe = req.body.id;
+    let recipe = req.body.recipe.id;
     try {
         var createdRecipe = await RecipeService.deleteRecipe(recipe)
         return res.status(201).json({createdRecipe, message: "Succesfully Deleted Recipe"})

@@ -58,7 +58,8 @@ exports.createRecipe = async function (recipe) {
 
 exports.deleteRecipe = async function (recipe) {
     try {
-        var recipe = await Recipe.findById(recipe);
+        let recipeId = mongoose.Types.ObjectId(recipe);
+        var recipe = await Recipe.findById(recipeId);
         recipe.isActive = false;
         return recipe._id;
     } catch (e) {
