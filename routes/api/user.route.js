@@ -1,7 +1,6 @@
 var express = require('express')
 var router = express.Router()
 var UserController = require('../../controllers/users.controller');
-var UploadController = require('../../controllers/upload.controller');
 var MailController = require('../../controllers/mail.controller');
 var Authorization = require('../../auth/authorization');
 
@@ -12,7 +11,6 @@ router.delete('/:id', Authorization, UserController.removeUser);
 router.post('/login', UserController.loginUser);
 router.post('/logout', UserController.loginUser);
 router.post('/guardarImgUser', UserController.guardarImagenUser);
-router.post('/uploadImgUser', UploadController.uploadFilesImgUser);
 router.post('/sendMail', MailController.sendEmail);
 
 module.exports = router;
