@@ -14,8 +14,8 @@ exports.getTopRecipes = async function (limit) {
 }
 
 exports.getRecipes = async function (query, page, limit, searchQuery) {
-    var per_page = parseInt(req.query.per_page) || 10
-    var page_no = parseInt(req.query.page_no) || 1
+    var per_page = parseInt(limit) || 10
+    var page_no = parseInt(page) || 1
     var pagination = {
         limit: per_page,
         skip: per_page * (page_no - 1)
@@ -37,8 +37,8 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
 }
 
 exports.filterRecipes = async function (query, page, limit, searchQuery) {
-    var per_page = parseInt(req.query.per_page) || 10
-    var page_no = parseInt(req.query.page_no) || 1
+    var per_page = parseInt(limit) || 10
+    var page_no = parseInt(page) || 1
     var pagination = {
         limit: per_page,
         skip: per_page * (page_no - 1)

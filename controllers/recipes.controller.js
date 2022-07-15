@@ -58,7 +58,9 @@ exports.getTopRecipes = async function (req, res, next) {
 exports.getRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    var searchQuery = req.params.searchQuery; //FIX this
+    let searchQuery = {
+        description: req.params.description ? req.params.description : ""
+    }
 
     try {
         var recipes = await RecipeService.getRecipes({}, page, limit, searchQuery);
@@ -71,7 +73,13 @@ exports.getRecipes = async function (req, res, next) {
 exports.filterRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    var searchQuery = req.params.searchQuery; //FIX this
+    let searchQuery = {
+        description: req.params.description ? req.params.description : "",
+        category: req.params.category ? req.params.category : "",
+        difficulty: req.params.difficulty ? req.params.difficulty : "",
+        vegan: req.params.vegan,
+        celiac: req.params.celiac,
+    }
 
     try {
         var recipes = await RecipeService.filterRecipes({}, page, limit, searchQuery);
