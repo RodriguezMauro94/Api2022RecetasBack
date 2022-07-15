@@ -7,7 +7,7 @@ exports.getRecipe = async function (recipe) {
     try {
         let recipeId = mongoose.Types.ObjectId(recipe.id);
         var recipe = await Recipe.findById(recipeId);
-        return recipe;
+        return [recipe];
     } catch (e) {
         console.log("error services", e);
         throw Error('Error while getting Recipe');
