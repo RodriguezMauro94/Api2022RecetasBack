@@ -2,7 +2,7 @@ var RecipeService = require('../services/recipe.service');
 
 _this = this;
 
-exports.getRecipe = async function (req, res, next) {
+exports.getDetails = async function (req, res, next) {
     try {
         let filtro= {id: req.params.id}
         var recipe = await RecipeService.getRecipe(filtro, 1, 1);
