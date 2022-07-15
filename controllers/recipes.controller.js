@@ -4,7 +4,7 @@ _this = this;
 
 exports.getRecipe = async function (req, res, next) {
     try {
-        let filtro= {_id: req.body.id}
+        let filtro= {id: req.body.id}
         var recipe = await RecipeService.getRecipes(filtro, 1, 1);
         return res.status(200).json({status: 200, data: recipe, message: "Succesfully Recipe Recieved"});
     } catch (e) {
@@ -58,7 +58,7 @@ exports.getTopRecipes = async function (req, res, next) {
 exports.getRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    var searchQuery = req.params.searchQuery;
+    var searchQuery = req.params.searchQuery; //FIX this
 
     try {
         var recipes = await RecipeService.getRecipes({}, page, limit, searchQuery);
