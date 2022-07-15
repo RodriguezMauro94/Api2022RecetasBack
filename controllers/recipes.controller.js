@@ -14,10 +14,16 @@ exports.getRecipe = async function (req, res, next) {
 
 exports.createRecipe = async function (req, res, next) {
     var recipe = {
-        //TODO
-        /*name: req.body.name,
-        email: req.body.email,
-        password: req.body.password*/
+        name: req.body.recipe.name,
+        description: req.body.recipe.description,
+        urlImage: req.body.recipe.urlImage,
+        ingredients: req.body.recipe.ingredients,
+        difficulty: req.body.recipe.difficulty,
+        vegan: req.body.recipe.vegan,
+        celiac: req.body.recipe.celiac,
+        user: req.body.recipe.user,
+        steps: req.body.recipe.steps,
+        category: req.body.recipe.category
     }
     try {
         var createdRecipe = await RecipeService.createRecipe(recipe)

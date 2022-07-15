@@ -33,8 +33,17 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
 
 exports.createRecipe = async function (recipe) {
     var newRecipe = new Recipe({
-        //TODO
-        //recipe: user.recipeId
+        name: recipe.name,
+        description: recipe.description,
+        urlImage: recipe.urlImage,
+        ingredients: recipe.ingredients,
+        difficulty: recipe.difficulty,
+        vegan: recipe.vegan,
+        celiac: recipe.celiac,
+        user: recipe.user,
+        steps: recipe.steps,
+        category: recipe.category,
+        isActive: true
     });
 
     try {
