@@ -23,7 +23,12 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
     try {
         console.log("Query", query);
         var recipes = await Recipe.find({
-            category: searchQuery // CHECK This
+            $or: [
+               {category: searchQuery.category},
+               {difficulty: searchQuery.difficulty},
+               {vegan: searchQuery.vegan}, 
+               {celiac: searchQuery.celiac}
+            ]// falta matchear por nombre e ingredientes
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
     } catch (e) {
