@@ -26,7 +26,9 @@ app.use(express.urlencoded({
 }));
 
 //aplico cors
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
