@@ -1,5 +1,4 @@
 var Recipe = require('../models/Recipe.model');
-var Rating = require('../models/Rating.model');
 
 _this = this
 
@@ -64,7 +63,8 @@ exports.deleteRecipe = async function (recipe) {
 }
 
 exports.createRating = async function (user) {
-    var newRating = new Rating({
+    return 1;
+    /*var newRating = new Rating({
         recipe: user.recipeId,
         rating: user.rating
     });
@@ -75,5 +75,5 @@ exports.createRating = async function (user) {
     } catch (e) {
         console.log(e);
         throw Error("Error while Creating Rating");
-    }
+    }*/
 }
