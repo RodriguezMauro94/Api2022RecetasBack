@@ -59,7 +59,7 @@ exports.getRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     let searchQuery = {
-        description: req.params.description ? req.params.description : ""
+        description: req.query.description ? req.query.description : ""
     }
 
     try {
@@ -74,11 +74,11 @@ exports.filterRecipes = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     let searchQuery = {
-        description: req.params.description ? req.params.description : "",
-        category: req.params.category ? req.params.category : "",
-        difficulty: req.params.difficulty ? req.params.difficulty : "",
-        vegan: req.params.vegan,
-        celiac: req.params.celiac,
+        description: req.query.description ? req.query.description : "",
+        category: req.query.category ? req.query.category : "",
+        difficulty: req.query.difficulty ? req.query.difficulty : "",
+        vegan: req.query.vegan,
+        celiac: req.query.celiac,
     }
 
     try {

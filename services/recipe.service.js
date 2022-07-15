@@ -25,7 +25,7 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         var recipes = await Recipe.find({
             $or: [
                 { description: { $regex: searchQuery.description } },
-                { 'ingredients.ingredient' : { $regex: searchQuery.description } },
+                { 'ingredients.ingredient': { $regex: searchQuery.description } },
                 { category: searchQuery.description }
             ]
         }).limit(pagination.limit).skip(pagination.skip).exec()
@@ -47,12 +47,16 @@ exports.filterRecipes = async function (query, page, limit, searchQuery) {
         console.log("Query", query);
         var recipes = await Recipe.find({
             $and: [
-                { description: { $regex: searchQuery.description } },
-                { 'ingredients.ingredient' : { $regex: searchQuery.description } },
-                { category: searchQuery.category },
-                { difficulty: searchQuery.difficulty },
-                { vegan: searchQuery.vegan },
-                { celiac: searchQuery.celiac }
+                searchQuery.description ? {
+                    $or: [
+                        { description: { $regex: searchQuery.description } },
+                        { 'ingredients.ingredient': { $regex: searchQuery.description } }
+                    ]
+                } : {},
+                searchQuery.category ? { category: searchQuery.category } : {},
+                searchQuery.difficulty ? { difficulty: searchQuery.difficulty } : {},
+                searchQuery.vegan ? { vegan: searchQuery.vegan } : {},
+                searchQuery.celiac ? { celiac: searchQuery.celiac } : {}
             ]
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
