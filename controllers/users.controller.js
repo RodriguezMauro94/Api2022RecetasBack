@@ -70,11 +70,8 @@ exports.removeUser = async function (req, res, next) {
 }
 
 exports.loginUser = async function (req, res, next) {
-    console.log("body",req.body)
-    var User = {
-        email: req.body.email,
-        password: req.body.password
-    }
+    console.log("body",req.body);
+    var User = req.body.user;
     try {
         var loginUser = await UserService.loginUser(User);
         return res.status(201).json({loginUser, message: "Succesfully login"})

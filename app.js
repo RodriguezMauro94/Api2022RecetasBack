@@ -26,10 +26,7 @@ app.use(express.urlencoded({
 }));
 
 //aplico cors
-app.use(cors({
-  origin: "*",
-  credentials: true,
-}));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
