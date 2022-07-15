@@ -9,7 +9,6 @@ router.put('/', Authorization, UserController.updateUser);
 router.post('/registration', UserController.createUser);
 router.delete('/:id', Authorization, UserController.removeUser);
 router.post('/login', UserController.loginUser);
-router.post('/logout', UserController.loginUser);
 router.post('/guardarImgUser', UserController.guardarImagenUser);
 router.post('/sendMail', MailController.sendEmail);
 

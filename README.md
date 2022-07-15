@@ -7,7 +7,6 @@ Usuarios:
 - post - /registration
 - delete - /:id
 - post - /login/
-- post - /logout/
 - post - /guardarImgUser
 - post - /uploadImgUser
 - post - /sendMail
