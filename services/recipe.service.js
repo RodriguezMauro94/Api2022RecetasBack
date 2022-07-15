@@ -3,6 +3,17 @@ var mongoose = require('mongoose');
 
 _this = this
 
+exports.getRecipe = async function (recipe) {
+    try {
+        let recipeId = mongoose.Types.ObjectId(recipe.id);
+        var recipe = await Recipe.findById(recipeId);
+        return recipe;
+    } catch (e) {
+        console.log("error services", e);
+        throw Error('Error while getting Recipe');
+    }
+}
+
 exports.getTopRecipes = async function (limit) {
     try {
         var Recipes = await Recipe.find().limit(limit);

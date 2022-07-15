@@ -4,8 +4,8 @@ _this = this;
 
 exports.getRecipe = async function (req, res, next) {
     try {
-        let filtro= {id: req.query.id}
-        var recipe = await RecipeService.getRecipes(filtro, 1, 1);
+        let filtro= {id: req.params.id}
+        var recipe = await RecipeService.getRecipe(filtro, 1, 1);
         return res.status(200).json({status: 200, data: recipe, message: "Succesfully Recipe Recieved"});
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message});
