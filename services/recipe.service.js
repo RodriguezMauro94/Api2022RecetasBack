@@ -1,4 +1,5 @@
 var Recipe = require('../models/Recipe.model');
+var mongoose = require('mongoose');
 
 _this = this
 
@@ -66,18 +67,28 @@ exports.deleteRecipe = async function (recipe) {
     }
 }
 
-exports.createRating = async function (user) {
-    return 1;
-    /*var newRating = new Rating({
-        recipe: user.recipeId,
-        rating: user.rating
-    });
+exports.createRating = async function (rating) {
+    let userId = mongoose.Types.ObjectId(rating.user);
+    var newRating = {
+        user: userId,
+        rating: rating.rating
+    }
 
     try {
-        var savedRating = await newRating.save();
-        return savedRating._id;
+        let recipeId = mongoose.Types.ObjectId(rating.recipeId);
+        var recipe = await Recipe.findOne(recipeId);
+
     } catch (e) {
-        console.log(e);
-        throw Error("Error while Creating Rating");
-    }*/
+        throw Error("Error occured while Finding the Recipe")
+    }
+    if (!recipe) {
+        return false;
+    }
+    recipe.rating.push(newRating);
+    try {
+        var savedRecipe = await recipe.save()
+        return savedRecipe;
+    } catch (e) {
+        throw Error("And Error occured while adding a rating");
+    }
 }
