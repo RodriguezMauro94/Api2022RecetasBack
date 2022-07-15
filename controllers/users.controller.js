@@ -27,9 +27,10 @@ exports.getUser = async function (req, res, next) {
 exports.createUser = async function (req, res, next) {
     console.log("llegue al controller",req.body)
     var User = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
+        name: req.body.user.name,
+        cellphone: req.body.user.cellphone,
+        email: req.body.user.email,
+        password: req.body.user.password
     }
     try {
         var createdUser = await UserService.createUser(User)

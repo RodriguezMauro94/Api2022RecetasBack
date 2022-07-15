@@ -26,6 +26,7 @@ exports.createUser = async function (user) {
     var newUser = new User({
         name: user.name,
         email: user.email,
+        cellphone: user.cellphone,
         date: new Date(),
         password: hashedPassword
     })
@@ -83,7 +84,7 @@ exports.deleteUser = async function (id) {
 
 exports.loginUser = async function (user) {
     try {
-        console.log("login:",user)
+        console.log("login:", user)
         var _details = await User.findOne({
             email: user.email
         });
