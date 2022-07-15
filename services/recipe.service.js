@@ -2,14 +2,9 @@ var Recipe = require('../models/Recipe.model');
 
 _this = this
 
-exports.getTopRecipes = async function (query, page, limit) {
-    var options = {
-        page,
-        limit
-    }
+exports.getTopRecipes = async function (limit) {
     try {
-        console.log("Query", query);
-        var Recipes = await Recipe.paginate(query, options);
+        var Recipes = await Recipe.find().limit(limit);
         return Recipes;
     } catch (e) {
         console.log("error services", e);
