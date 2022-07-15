@@ -24,11 +24,36 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         console.log("Query", query);
         var recipes = await Recipe.find({
             $or: [
-               {category: searchQuery.category},
-               {difficulty: searchQuery.difficulty},
-               {vegan: searchQuery.vegan}, 
-               {celiac: searchQuery.celiac}
-            ]// falta matchear por nombre e ingredientes
+                { description: { $regex: searchQuery.description } },
+                { 'ingredients.ingredient' : { $regex: searchQuery.description } },
+                { category: searchQuery.description }
+            ]
+        }).limit(pagination.limit).skip(pagination.skip).exec()
+        return recipes;
+    } catch (e) {
+        console.log("error services", e);
+        throw Error('Error while searching a recipe');
+    }
+}
+
+exports.filterRecipes = async function (query, page, limit, searchQuery) {
+    var per_page = parseInt(req.query.per_page) || 10
+    var page_no = parseInt(req.query.page_no) || 1
+    var pagination = {
+        limit: per_page,
+        skip: per_page * (page_no - 1)
+    }
+    try {
+        console.log("Query", query);
+        var recipes = await Recipe.find({
+            $and: [
+                { description: { $regex: searchQuery.description } },
+                { 'ingredients.ingredient' : { $regex: searchQuery.description } },
+                { category: searchQuery.category },
+                { difficulty: searchQuery.difficulty },
+                { vegan: searchQuery.vegan },
+                { celiac: searchQuery.celiac }
+            ]
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
     } catch (e) {

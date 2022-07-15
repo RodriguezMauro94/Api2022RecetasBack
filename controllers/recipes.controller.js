@@ -4,7 +4,7 @@ _this = this;
 
 exports.getRecipe = async function (req, res, next) {
     try {
-        let filtro= {id: req.body.id}
+        let filtro= {id: req.query.id}
         var recipe = await RecipeService.getRecipes(filtro, 1, 1);
         return res.status(200).json({status: 200, data: recipe, message: "Succesfully Recipe Recieved"});
     } catch (e) {
@@ -63,6 +63,19 @@ exports.getRecipes = async function (req, res, next) {
     try {
         var recipes = await RecipeService.getRecipes({}, page, limit, searchQuery);
         return res.status(200).json({status: 200, data: recipes, message: "Succesfully Recipes Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+
+exports.filterRecipes = async function (req, res, next) {
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 10;
+    var searchQuery = req.params.searchQuery; //FIX this
+
+    try {
+        var recipes = await RecipeService.filterRecipes({}, page, limit, searchQuery);
+        return res.status(200).json({status: 200, data: recipes, message: "Succesfully Recipes Filtered"});
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message});
     }
