@@ -19,13 +19,8 @@ Recetas:
 - get - /getTopRecipes
 - get - /getRecipes/:searchQuery
 - post - /rating
-
-Recetas-Img:
 - post - /imgRecipeCover
 - post - /imgRecipeStep
-
-Categorias:
-- get - /
 
 ### Prerequisites
 
