@@ -36,8 +36,9 @@ exports.createRecipe = async function (req, res, next) {
 
 exports.deleteRecipe = async function (req, res, next) {
     let recipe = req.body.recipe.id;
+    let token = req.body.recipe.token;
     try {
-        var createdRecipe = await RecipeService.deleteRecipe(recipe)
+        var createdRecipe = await RecipeService.deleteRecipe(recipe, token)
         return res.status(201).json({createdRecipe, message: "Succesfully Deleted Recipe"})
     } catch (e) {
         console.log(e)
@@ -91,7 +92,7 @@ exports.filterRecipes = async function (req, res, next) {
 
 exports.postRating = async function (req, res, next) {
     var Rating = {
-        user: req.body.rating.user,
+        token: req.body.rating.token,
         rating: req.body.rating.rating,
         recipeId: req.body.rating.recipeId
     }

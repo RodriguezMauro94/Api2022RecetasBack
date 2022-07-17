@@ -105,8 +105,10 @@ exports.createRecipe = async function (recipe) {
     }
 }
 
-exports.deleteRecipe = async function (recipe) {
+exports.deleteRecipe = async function (recipe, token) {
     try {
+        await authenticate(token);
+
         let recipeId = mongoose.Types.ObjectId(recipe);
         var recipe = await Recipe.findById(recipeId);
         recipe.isActive = false;
@@ -118,9 +120,9 @@ exports.deleteRecipe = async function (recipe) {
 }
 
 exports.createRating = async function (rating) {
-    let userId = mongoose.Types.ObjectId(rating.user);
+    var decode = await authenticate(recipe.user);
     var newRating = {
-        user: userId,
+        user: decode.id,
         rating: rating.rating
     }
 
