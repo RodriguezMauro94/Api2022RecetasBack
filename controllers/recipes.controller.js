@@ -19,8 +19,8 @@ exports.createRecipe = async function (req, res, next) {
         urlImage: req.body.recipe.urlImage,
         ingredients: req.body.recipe.ingredients,
         difficulty: req.body.recipe.difficulty,
-        vegan: req.body.recipe.vegan,
-        celiac: req.body.recipe.celiac,
+        vegan: (req.body.recipe.vegan == "on") ? true : false,
+        celiac: (req.body.recipe.celiac == "on") ? true : false,
         user: req.body.recipe.user,
         steps: req.body.recipe.steps,
         category: req.body.recipe.category

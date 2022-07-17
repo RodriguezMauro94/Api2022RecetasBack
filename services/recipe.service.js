@@ -1,5 +1,6 @@
 var Recipe = require('../models/Recipe.model');
 var mongoose = require('mongoose');
+const { authenticate } = require('./auth.service');
 
 _this = this
 
@@ -78,6 +79,9 @@ exports.filterRecipes = async function (query, page, limit, searchQuery) {
 }
 
 exports.createRecipe = async function (recipe) {
+
+    var decode = await authenticate(recipe.user);
+
     var newRecipe = new Recipe({
         name: recipe.name,
         description: recipe.description,
@@ -86,7 +90,7 @@ exports.createRecipe = async function (recipe) {
         difficulty: recipe.difficulty,
         vegan: recipe.vegan,
         celiac: recipe.celiac,
-        user: recipe.user,
+        user: decode.id,
         steps: recipe.steps,
         category: recipe.category,
         isActive: true
