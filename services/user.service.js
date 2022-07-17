@@ -1,22 +1,19 @@
 var User = require('../models/User.model');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const { authenticate } = require('./auth.service');
 
 _this = this
 
-exports.getUsers = async function (query, page, limit) {
-    var options = {
-        page,
-        limit
-    }
+exports.getUser = async function (token) {
+    var decode = await authenticate(token);
     try {
-        console.log("Query",query)
-        var Users = await User.paginate(query, options)
-        return Users;
-
+        var user = await User.findById(decode.id);
+        //desencriptar password
+        return user;
     } catch (e) {
         console.log("error services",e)
-        throw Error('Error while Paginating Users');
+        throw Error('Error while getting User');
     }
 }
 

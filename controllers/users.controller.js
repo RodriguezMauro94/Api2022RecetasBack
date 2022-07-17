@@ -16,8 +16,7 @@ exports.getUsers = async function (req, res, next) {
 
 exports.getUser = async function (req, res, next) {
     try {
-        let filtro= {email: req.body.email, _id: req.body.id}
-        var user = await UserService.getUsers(filtro, 1, 1);
+        var user = await UserService.getUser(req.params.token)
         return res.status(200).json({status: 200, data: user, message: "Succesfully User Recieved"});
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message});

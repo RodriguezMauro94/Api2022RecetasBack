@@ -15,6 +15,18 @@ exports.getRecipe = async function (recipe) {
     }
 }
 
+exports.getRecipesByUser = async function (token) {
+    var decode = await authenticate(token);
+    
+    try {
+        var recipes = await Recipe.find({ user: decode.id }).exec()
+        return recipes;
+    } catch (e) {
+        console.log("error services", e);
+        throw Error('Error while searching a recipe');
+    }
+}
+
 exports.getTopRecipes = async function (limit) {
     try {
         var Recipes = await Recipe.find().limit(limit);
@@ -33,7 +45,6 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
         skip: per_page * (page_no - 1)
     }
     try {
-        console.log("Query", query);
         var recipes = await Recipe.find({
             $or: [
                 { description: { $regex: searchQuery.description } },
@@ -56,7 +67,6 @@ exports.filterRecipes = async function (query, page, limit, searchQuery) {
         skip: per_page * (page_no - 1)
     }
     try {
-        console.log("Query", query);
         var recipes = await Recipe.find({
             $and: [
                 searchQuery.description ? {
