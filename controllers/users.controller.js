@@ -41,17 +41,14 @@ exports.createUser = async function (req, res, next) {
 }
 
 exports.updateUser = async function (req, res, next) {
-    if (!req.body.name) {
-        return res.status(400).json({status: 400., message: "Name be present"})
-    }
-    
-    var User = {
-        name: req.body.name ? req.body.name : null,
-        email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+    var newUser = {
+        token: req.body.user.token,
+        name: req.body.user.name,
+        password: req.body.user.password
     }
     try {
-        var updatedUser = await UserService.updateUser(User)
+        var oldUser = await UserService.getUser(newUser.token);
+        var updatedUser = await UserService.updateUser(oldUser, newUser);
         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
     } catch (e) {
         return res.status(400).json({status: 400., message: e.message})
@@ -59,7 +56,6 @@ exports.updateUser = async function (req, res, next) {
 }
 
 exports.removeUser = async function (req, res, next) {
-
     var id = req.params.id;
     try {
         var deleted = await UserService.deleteUser(id);

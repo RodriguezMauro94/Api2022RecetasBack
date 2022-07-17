@@ -9,7 +9,6 @@ exports.getUser = async function (token) {
     var decode = await authenticate(token);
     try {
         var user = await User.findById(decode.id);
-        //desencriptar password
         return user;
     } catch (e) {
         console.log("error services",e)
@@ -42,20 +41,9 @@ exports.createUser = async function (user) {
     }
 }
 
-exports.updateUser = async function (user) {
-    var id = {name :user.name}
-
-    try {
-        var oldUser = await User.findOne(id);
-    } catch (e) {
-        throw Error("Error occured while Finding the User")
-    }
-    if (!oldUser) {
-        return false;
-    }
-    var hashedPassword = bcrypt.hashSync(user.password, 8);
-    oldUser.name = user.name
-    oldUser.email = user.email
+exports.updateUser = async function (oldUser, newUser) {
+    var hashedPassword = bcrypt.hashSync(newUser.password, 8);
+    oldUser.name = newUser.name
     oldUser.password = hashedPassword
     try {
         var savedUser = await oldUser.save()

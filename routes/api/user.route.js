@@ -5,7 +5,7 @@ var MailController = require('../../controllers/mail.controller');
 var Authorization = require('../../auth/authorization');
 
 router.get('/myProfile/:token', UserController.getUser);
-router.put('/', Authorization, UserController.updateUser);
+router.post('/updateUser/', UserController.updateUser);
 router.post('/registration', UserController.createUser);
 router.delete('/:id', Authorization, UserController.removeUser);
 router.post('/login', UserController.loginUser);
