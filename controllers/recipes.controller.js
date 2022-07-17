@@ -14,7 +14,6 @@ exports.getDetails = async function (req, res, next) {
 
 exports.myRecipes = async function (req, res, next) {
     let token= req.params.token
-
     try {
         var recipes = await RecipeService.getRecipesByUser(token);
         return res.status(200).json({status: 200, data: recipes, message: "Succesfully Recipes Recieved"});

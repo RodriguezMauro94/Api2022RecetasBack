@@ -8,6 +8,7 @@ router.delete('/delete/:id', RecipeController.deleteRecipe);
 router.get('/getTopRecipes/', RecipeController.getTopRecipes);
 router.get('/getRecipes/', RecipeController.getRecipes);
 router.get('/filterRecipes/', RecipeController.filterRecipes);
+router.get('/myRecipes/:token', RecipeController.myRecipes);
 router.post('/rating', RecipeController.postRating);
 
 module.exports = router;
