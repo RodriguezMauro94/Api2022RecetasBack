@@ -17,7 +17,7 @@ exports.getRecipe = async function (recipe) {
 
 exports.getRecipesByUser = async function (token) {
     var decode = await authenticate(token);
-    
+
     try {
         var recipes = await Recipe.find({ user: decode.id }).exec()
         return recipes;
@@ -117,12 +117,17 @@ exports.createRecipe = async function (recipe) {
 
 exports.deleteRecipe = async function (recipe, token) {
     try {
-        await authenticate(token);
-
+        var decode = await authenticate(token);
+        
         let recipeId = mongoose.Types.ObjectId(recipe);
         var recipe = await Recipe.findById(recipeId);
+        if (decode.id != recipe.user) {
+            throw Error("Recipe is from another user");
+        }
         recipe.isActive = false;
-        return recipe._id;
+
+        var savedRecipe = await recipe.save()
+        return savedRecipe;
     } catch (e) {
         console.log(e);
         throw Error("Error while Creating Recipe");

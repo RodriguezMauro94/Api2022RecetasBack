@@ -1,12 +1,23 @@
 var RecipeService = require('../services/recipe.service');
+var UserService = require('../services/user.service');
 
 _this = this;
 
 exports.getDetails = async function (req, res, next) {
     try {
-        let filtro= {id: req.params.id}
-        var recipe = await RecipeService.getRecipe(filtro, 1, 1);
-        return res.status(200).json({status: 200, data: recipe, message: "Succesfully Recipe Recieved"});
+        var isMine = false;
+        let token = req.query.token;
+        var user;
+        if (token != null) {
+            user = await UserService.getUser(token)
+        }
+        let filtro = {id: req.params.id};
+        var recipe = await RecipeService.getRecipe(filtro, user);
+        
+        if (user != null && recipe[0].user == user.id) {
+            isMine = true;
+        }
+        return res.status(200).json({status: 200, data: {recipe: recipe, isMine: isMine}, message: "Succesfully Recipe Recieved"});
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message});
     }
@@ -45,11 +56,11 @@ exports.createRecipe = async function (req, res, next) {
 }
 
 exports.deleteRecipe = async function (req, res, next) {
-    let recipe = req.body.recipe.id;
-    let token = req.body.recipe.token;
+    let recipe = req.params.id;
+    let token = req.query.token;
     try {
-        var createdRecipe = await RecipeService.deleteRecipe(recipe, token)
-        return res.status(201).json({createdRecipe, message: "Succesfully Deleted Recipe"})
+        var deletedRecipe = await RecipeService.deleteRecipe(recipe, token)
+        return res.status(201).json({deletedRecipe, message: "Succesfully Deleted Recipe"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "Recipe deletion was Unsuccesfull"})
