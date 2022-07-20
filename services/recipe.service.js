@@ -19,7 +19,17 @@ exports.getRecipesByUser = async function (token) {
     var decode = await authenticate(token);
 
     try {
-        var recipes = await Recipe.find({ user: decode.id }).exec()
+        var recipes = await Recipe.find({
+            $and: [
+                { user: decode.id },
+                {
+                    $or: [
+                        { status: 'active' },
+                        { status: 'draft' }
+                    ]
+                }
+            ]
+        }).exec()
         return recipes;
     } catch (e) {
         console.log("error services", e);
@@ -29,7 +39,7 @@ exports.getRecipesByUser = async function (token) {
 
 exports.getTopRecipes = async function (limit) {
     try {
-        var Recipes = await Recipe.find().limit(limit);
+        var Recipes = await Recipe.find({ status: 'active' }).limit(limit);
         return Recipes;
     } catch (e) {
         console.log("error services", e);
@@ -49,7 +59,8 @@ exports.getRecipes = async function (query, page, limit, searchQuery) {
             $or: [
                 { description: { $regex: searchQuery.description } },
                 { 'ingredients.ingredient': { $regex: searchQuery.description } },
-                { category: searchQuery.description }
+                { category: searchQuery.description },
+                { status: 'active' }
             ]
         }).limit(pagination.limit).skip(pagination.skip).exec()
         return recipes;
@@ -72,8 +83,8 @@ exports.filterRecipes = async function (query, page, limit, searchQuery) {
                 searchQuery.description ? {
                     $or: [
                         { description: { $regex: searchQuery.description } },
-                        { 'ingredients.ingredient': { $regex: searchQuery.description } }
-                    ]
+                        { 'ingredients.ingredient': { $regex: searchQuery.description } },
+                        { status: 'active' }                    ]
                 } : {},
                 searchQuery.category ? { category: searchQuery.category } : {},
                 searchQuery.difficulty ? { difficulty: searchQuery.difficulty } : {},
@@ -118,7 +129,7 @@ exports.createRecipe = async function (recipe) {
 exports.deleteRecipe = async function (recipe, token) {
     try {
         var decode = await authenticate(token);
-        
+
         let recipeId = mongoose.Types.ObjectId(recipe);
         var recipe = await Recipe.findById(recipeId);
         if (decode.id != recipe.user) {
@@ -137,7 +148,7 @@ exports.deleteRecipe = async function (recipe, token) {
 exports.publishRecipe = async function (recipe, token) {
     try {
         var decode = await authenticate(token);
-        
+
         let recipeId = mongoose.Types.ObjectId(recipe);
         var recipe = await Recipe.findById(recipeId);
         if (decode.id != recipe.user) {
@@ -163,7 +174,6 @@ exports.createRating = async function (rating) {
     try {
         let recipeId = mongoose.Types.ObjectId(rating.recipeId);
         var recipe = await Recipe.findOne(recipeId);
-
     } catch (e) {
         throw Error("Error occured while Finding the Recipe")
     }
