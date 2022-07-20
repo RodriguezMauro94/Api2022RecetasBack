@@ -44,7 +44,8 @@ exports.createRecipe = async function (req, res, next) {
         celiac: (req.body.recipe.celiac == "on") ? true : false,
         user: req.body.recipe.user,
         steps: req.body.recipe.steps,
-        category: req.body.recipe.category
+        category: req.body.recipe.category,
+        status: req.body.recipe.status ? req.body.recipe.status : 'active'
     }
     try {
         var createdRecipe = await RecipeService.createRecipe(recipe)
@@ -61,6 +62,18 @@ exports.deleteRecipe = async function (req, res, next) {
     try {
         var deletedRecipe = await RecipeService.deleteRecipe(recipe, token)
         return res.status(201).json({deletedRecipe, message: "Succesfully Deleted Recipe"})
+    } catch (e) {
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Recipe deletion was Unsuccesfull"})
+    }
+}
+
+exports.publishRecipe = async function (req, res, next) {
+    let recipe = req.params.id;
+    let token = req.query.token;
+    try {
+        var publishedRecipe = await RecipeService.publishRecipe(recipe, token)
+        return res.status(201).json({publishedRecipe, message: "Succesfully Published Recipe"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "Recipe deletion was Unsuccesfull"})

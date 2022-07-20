@@ -3,17 +3,6 @@ var UserImgService =require('../services/userImg.service');
 
 _this = this;
 
-exports.getUsers = async function (req, res, next) {
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
-    try {
-        var Users = await UserService.getUsers({}, page, limit);
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
-    } catch (e) {
-        return res.status(400).json({status: 400, message: e.message});
-    }
-}
-
 exports.getUser = async function (req, res, next) {
     try {
         var user = await UserService.getUser(req.params.token)

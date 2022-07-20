@@ -13,7 +13,7 @@ var RecipeSchema = new mongoose.Schema({
     steps: {type: Array, "default": [] },
     category: {type: String, required: true},
     rating: {type: Array, "default": [] },
-    isActive: {type: Boolean, "default": true}
+    status: {type: String, "default": 'active'}
 });
 
 RecipeSchema.plugin(mongoosePaginate);

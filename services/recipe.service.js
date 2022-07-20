@@ -103,7 +103,7 @@ exports.createRecipe = async function (recipe) {
         user: decode.id,
         steps: recipe.steps,
         category: recipe.category,
-        isActive: true
+        status: recipe.status
     });
 
     try {
@@ -124,13 +124,32 @@ exports.deleteRecipe = async function (recipe, token) {
         if (decode.id != recipe.user) {
             throw Error("Recipe is from another user");
         }
-        recipe.isActive = false;
+        recipe.status = 'deleted';
 
         var savedRecipe = await recipe.save()
         return savedRecipe;
     } catch (e) {
         console.log(e);
-        throw Error("Error while Creating Recipe");
+        throw Error("Error while deleting Recipe");
+    }
+}
+
+exports.publishRecipe = async function (recipe, token) {
+    try {
+        var decode = await authenticate(token);
+        
+        let recipeId = mongoose.Types.ObjectId(recipe);
+        var recipe = await Recipe.findById(recipeId);
+        if (decode.id != recipe.user) {
+            throw Error("Recipe is from another user");
+        }
+        recipe.status = 'active';
+
+        var savedRecipe = await recipe.save()
+        return savedRecipe;
+    } catch (e) {
+        console.log(e);
+        throw Error("Error while publishing Recipe");
     }
 }
 
