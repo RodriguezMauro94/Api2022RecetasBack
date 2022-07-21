@@ -8,15 +8,15 @@ exports.sendEmail = async function (req, res, next){
         //host: 'svp-02715.fibercorp.local',
         //secure: false,
         port:25,
-        service: 'Gmail',
+        service: 'Outlook',
         auth: {
-            user: 'uadeapi2022@gmail.com',
-            pass: 'UadeGrupo1'  //contraseña cuenta  IMPORTANTE HABILITAR acceso apps poco seguras google
+            user: process.env.EMAIL_ADDRESS,
+            pass: process.env.EMAIL_PASSWORD,  //contraseña cuenta  IMPORTANTE HABILITAR acceso apps poco seguras google
         }
      });
     // Definimos el email
     var mailOptions = {
-        from: 'uadeapi2022@gmail.com',
+        from: 'uadeapi2022@outlook.com',
         to: req.body.destinatario,
         subject: req.body.asunto,
         html: '<h1> y aca se muestra el texto  </h1><h3>' +req.body.texto+'</h3>',
