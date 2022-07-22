@@ -12,6 +12,17 @@
 | **ELIMINACION DE RECETAS** | Los usuarios podrán eliminar sus recetas del sitio.|
 | **CALIFICAR RECETAS** | Los usuarios registrados podrán calificar las recetas publicadas. Esta calificación debe poder visualizarse en el sitio principal para que los usuarios puedan filtrar recetas.|
 
+
+
+#### *Diagrama de clases conceptuales*
+
+![diagrama de clases conceptuales](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modeloTpoApi.JPG?raw=true)
+
+#### *Diagrama **mongodb***
+
+![diagrama mongodb](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modelobdTPOapi.JPG?raw=true)
+ 
+
 # Endpoints
 Usuarios:
 - get - /
@@ -44,6 +55,10 @@ Recetas:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Equipo de trabajo
+- Mauro Rodriguez
+- Franco Benito
+
 ### Prerequisites
 
 Node
@@ -70,20 +85,6 @@ nodemon
 $ npm install
 $ bower install (if require)
 ```
-
-
-
-#### *Diagrama de clases conceptuales*
-
-![diagrama de clases conceptuales](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modeloTpoApi.JPG?raw=true)
-
-#### *Diagrama **mongodb***
-
-![diagrama mongodb](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modelobdTPOapi.JPG?raw=true)
- 
-## Equipo de trabajo
-- Mauro Rodriguez
-- Franco Benito
 
 
 ## Running the tests
