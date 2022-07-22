@@ -21,6 +21,17 @@ Recetas:
 - post - /imgRecipeCover
 - post - /imgRecipeStep
 
+<!-- PROYECTOS -->
+## Proyectos
+
+| Proyecto | Link |
+| ------ | ------ |
+| **FRONT** | https://github.com/RodriguezMauro94/Api2022Recetas |
+| **BACK** | https://github.com/RodriguezMauro94/Api2022RecetasBack |
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### Prerequisites
 
 Node
@@ -47,6 +58,22 @@ nodemon
 $ npm install
 $ bower install (if require)
 ```
+
+
+
+#### *Diagrama de clases conceptuales*
+
+![diagrama de clases conceptuales](https://imgur.com/a/eF0BqQx)
+
+#### *Diagrama **mongodb***
+
+![diagrama mongodb]()
+ 
+## Equipo de trabajo
+- Mauro Rodriguez
+- Franco Benito
+
+
 ## Running the tests
 
 It consist of a User model and controller. The model
