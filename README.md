@@ -63,11 +63,11 @@ $ bower install (if require)
 
 #### *Diagrama de clases conceptuales*
 
-![diagrama de clases conceptuales](https://imgur.com/a/eF0BqQx)
+![diagrama de clases conceptuales](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modeloTpoApi.JPG?raw=true)
 
 #### *Diagrama **mongodb***
 
-![diagrama mongodb](../modelobdTPOapi.JPG)
+![diagrama mongodb](https://github.com/RodriguezMauro94/Api2022RecetasBack/blob/main/img/modelobdTPOapi.JPG?raw=true)
  
 ## Equipo de trabajo
 - Mauro Rodriguez
