@@ -67,7 +67,7 @@ $ bower install (if require)
 
 #### *Diagrama **mongodb***
 
-![diagrama mongodb](img\modelobdTPOapi.JPG)
+![diagrama mongodb](../modelobdTPOapi.JPG)
  
 ## Equipo de trabajo
 - Mauro Rodriguez
